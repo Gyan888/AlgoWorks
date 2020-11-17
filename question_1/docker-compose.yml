@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  redis:
+    image: redis:latest
+    container_name: api_redis_1
+    ports:
+      - "6379:6379"
+  worker:
+    build: .
+    command: sh -c ./start.sh
+    container_name: celery_worker_1
+    links:
+      - redis
+    depends_on:
+      - redis
+    environment:
+      - REDIS_HOST=redis
+      - DB_HOST=db
+      - ENV=dev

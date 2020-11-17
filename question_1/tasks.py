@@ -4,11 +4,11 @@ import redis
 import json
 
 app = Celery(
-  broker='redis://localhost:6379/0',
+  broker='redis://redis:6379/0',
 )
 
 
-_db = redis.Redis(host="localhost", port=6379)
+_db = redis.Redis(host="redis", port=6379)
 
 def fibonaaci(number):
     series = (number+1) * [0]
